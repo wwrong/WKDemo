@@ -15,6 +15,8 @@
 		EA20607F1D1A308A0057EDB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA20607D1D1A308A0057EDB3 /* LaunchScreen.storyboard */; };
 		EA20608A1D1A308A0057EDB3 /* WKDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2060891D1A308A0057EDB3 /* WKDemoTests.m */; };
 		EA2060951D1A308A0057EDB3 /* WKDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2060941D1A308A0057EDB3 /* WKDemoUITests.m */; };
+		EA2060B11D1A54AD0057EDB3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = EA2060B01D1A54AD0057EDB3 /* www */; };
+		EA2060B41D1A62BF0057EDB3 /* GNFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2060B31D1A62BF0057EDB3 /* GNFileManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		EA2060901D1A308A0057EDB3 /* WKDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WKDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2060941D1A308A0057EDB3 /* WKDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKDemoUITests.m; sourceTree = "<group>"; };
 		EA2060961D1A308A0057EDB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA2060B01D1A54AD0057EDB3 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		EA2060B21D1A62BF0057EDB3 /* GNFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNFileManager.h; sourceTree = "<group>"; };
+		EA2060B31D1A62BF0057EDB3 /* GNFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNFileManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +106,13 @@
 		EA20606E1D1A308A0057EDB3 /* WKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EA2060B01D1A54AD0057EDB3 /* www */,
 				EA2060721D1A308A0057EDB3 /* AppDelegate.h */,
 				EA2060731D1A308A0057EDB3 /* AppDelegate.m */,
 				EA2060751D1A308A0057EDB3 /* ViewController.h */,
 				EA2060761D1A308A0057EDB3 /* ViewController.m */,
+				EA2060B21D1A62BF0057EDB3 /* GNFileManager.h */,
+				EA2060B31D1A62BF0057EDB3 /* GNFileManager.m */,
 				EA2060781D1A308A0057EDB3 /* Main.storyboard */,
 				EA20607B1D1A308A0057EDB3 /* Assets.xcassets */,
 				EA20607D1D1A308A0057EDB3 /* LaunchScreen.storyboard */,
@@ -246,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2060B11D1A54AD0057EDB3 /* www in Resources */,
 				EA20607F1D1A308A0057EDB3 /* LaunchScreen.storyboard in Resources */,
 				EA20607C1D1A308A0057EDB3 /* Assets.xcassets in Resources */,
 				EA20607A1D1A308A0057EDB3 /* Main.storyboard in Resources */,
@@ -275,6 +284,7 @@
 			files = (
 				EA2060771D1A308A0057EDB3 /* ViewController.m in Sources */,
 				EA2060741D1A308A0057EDB3 /* AppDelegate.m in Sources */,
+				EA2060B41D1A62BF0057EDB3 /* GNFileManager.m in Sources */,
 				EA2060711D1A308A0057EDB3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,10 +428,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WKDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = gn.WKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -429,10 +443,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = WKDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = gn.WKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
