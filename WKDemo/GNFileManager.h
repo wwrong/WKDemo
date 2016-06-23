@@ -15,5 +15,5 @@
 @property (nonatomic,strong) NSURL *resourceURL;
 -(void)addResources;
 -(void)checkResources;
-
++(instancetype)sharedfileManager;
 @end

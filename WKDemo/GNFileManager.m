@@ -10,6 +10,7 @@
 #import "GNFileManager.h"
 @interface GNFileManager ()
 
+@property (nonatomic,strong) NSArray *resourceArray;
 
 @end
 
@@ -25,8 +26,9 @@ static id instance;
 
 {
 //    遍历bundle下的www文件夹中的所有文件，然后拷进temp的www文件夹中。
-//    如果拷贝失败，报错并且删除。
-//    如果拷贝成功，制作www备份。
+//    如果拷贝失败，报错并且删除。      ----？？ 什么情况下会失败？？怎么判断？
+//    如果拷贝成功，制作www备份。      放进Caches目录里。
+    
     
         NSString *bunPath =  [[NSBundle mainBundle]bundlePath];
         NSString *wPath = [bunPath stringByAppendingPathComponent:@"www/"];
@@ -53,10 +55,18 @@ static id instance;
             } 
             
         }
-            self.resourceURL =  temDirURL;
+    
+        
+    
+    
+            self.resourceURL = temDirURL;
+    
+    
+    if (self.htmlURL == nil) {
+        NSLog(@"html未找到");
+    }
 
 }
-
 
 
 - (NSArray*) allFilesAtPath:(NSString*) dirString {
@@ -93,11 +103,20 @@ static id instance;
 
 
 
+
+
+
 -(void)checkResources{
-    if ([self differFromBundle]) {
+    if ([self differFromBundle]  == YES) {
+        NSLog(@"资源有不同");
+        NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"www"];
+        
         
     }
-
+    
+    else{
+        NSLog(@"无更新。");
+    }
 //    检查temp的www文件夹中的文件，和bundle中的www文件夹对比。
 //    如果没有区别，什么都不做。
 //    如果有区别，执行addResources方法，如果成功，覆盖文件。如果不成功，还原以前的www。
@@ -106,24 +125,50 @@ static id instance;
 
 
 
+
+
+
 -(BOOL)differFromBundle{
+    for (NSString *resourceStr in self.resourceArray) {
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSString *fullStr = [@"file://" stringByAppendingString:resourceStr];
+        NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"www"];
+        NSString *tempFilePath = [tempPath stringByAppendingPathComponent:resourceStr.lastPathComponent];
+        if ([manager contentsEqualAtPath:fullStr andPath:tempFilePath] == NO) {
+            NSLog(@"文件有更新！");
+            return YES;
+        }
+        else{
+            return NO;
+        }
+    
+    }
+    
+    
     return YES;
 }
 
-//
-//+(instancetype)allocWithZone:(struct _NSZone *)zone{
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//    instance = [super allocWithZone:zone];
-//    });
-//    return instance;
-//}
-//
-//
-//
-//-(instancetype)sharedfileManager{
-//    return instance;
-//}
+
+
+
++(instancetype)allocWithZone:(struct _NSZone *)zone{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+    instance = [super allocWithZone:zone];
+    });
+    return instance;
+}
+
+
+
+
++(instancetype)sharedfileManager{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+     instance = [[self alloc]init];
+    });
+    return instance;
+}
 
 
 @end

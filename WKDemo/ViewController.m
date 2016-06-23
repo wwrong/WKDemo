@@ -23,67 +23,38 @@
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
-    GNFileManager *manager = [[GNFileManager alloc]init];
+    GNFileManager *manager = [GNFileManager sharedfileManager];
     [manager addResources];
     self.htmlURL = manager.htmlURL;
     NSString *str = [NSString stringWithContentsOfURL:self.htmlURL encoding:NSUTF8StringEncoding error:nil];
     [self.webView loadHTMLString:str baseURL:manager.resourceURL];
 
-    
-    
-    
-//    NSURL *url = [self fileURLForBuggyWKWebView8:[[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html"]];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    [self.webView loadRequest:request];
-
-    NSString *bunPath =  [[NSBundle mainBundle]bundlePath];
-    NSString *wPath = [bunPath stringByAppendingPathComponent:@"www/"];
-    NSLog(@"\n www path  is %@ \n",wPath);
-    NSArray *resourceArray = [self allFilesAtPath:wPath];
-    NSLog(@"the array is \n   %@   \n",resourceArray);
-    
-    NSURL *css = [self fileURLForBuggyWKWebView8:resourceArray];
-
-    if (self.htmlURL != nil) {
-    }
-    else{
-        NSLog(@"html未找到");
-    }
-    
-//    NSString *str = [NSString stringWithContentsOfURL:self.htmlURL encoding:NSUTF8StringEncoding error:nil];
-    
-//    [self.webView loadHTMLString:str baseURL:css];
-
 }
 
 
-
-
-- (NSURL *)fileURLForBuggyWKWebView8:(NSArray *)fileURL {
-    NSFileManager *fileManager= [NSFileManager defaultManager];
-    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
-    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:nil];
-    
-    for (NSString *cssStr in fileURL) {
-  
-        
-        NSLog(@"temDirURL is %@",temDirURL);
-        NSURL *dstURL = [temDirURL URLByAppendingPathComponent:cssStr.lastPathComponent];
-        NSLog(@"dstURL is %@",dstURL);
-        // Now copy given file to the temp directory
-        
-        NSString *cssURLStr = [@"file://" stringByAppendingString:cssStr];
-        [fileManager removeItemAtURL:dstURL error:nil];
-        [fileManager copyItemAtURL:[NSURL URLWithString:cssURLStr] toURL:dstURL error:nil];
-        if ([cssStr.lastPathComponent containsString:@"html"]) {
-            NSLog(@"\n bingo %@\n",cssStr.lastPathComponent);
-            self.htmlURL = [NSURL URLWithString:cssURLStr];
-            NSLog(@"\nand the html is %@ \n",self.htmlURL);
-        } 
-        
-    }
-    return temDirURL;
-}
+//- (NSURL *)fileURLForBuggyWKWebView8:(NSArray *)fileURL {
+//    NSFileManager *fileManager= [NSFileManager defaultManager];
+//    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
+//    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:nil];
+//    
+//    for (NSString *resourceStr in fileURL) {
+//        NSLog(@"temDirURL is %@",temDirURL);
+//        NSURL *dstURL = [temDirURL URLByAppendingPathComponent:resourceStr.lastPathComponent];
+//        NSLog(@"dstURL is %@",dstURL);
+//        // Now copy given file to the temp directory
+//        
+//        NSString *cssURLStr = [@"file://" stringByAppendingString:resourceStr];
+//        [fileManager removeItemAtURL:dstURL error:nil];
+//        [fileManager copyItemAtURL:[NSURL URLWithString:cssURLStr] toURL:dstURL error:nil];
+//        if ([resourceStr.lastPathComponent containsString:@"html"]) {
+//            NSLog(@"\n bingo %@\n",resourceStr.lastPathComponent);
+//            self.htmlURL = [NSURL URLWithString:cssURLStr];
+//            NSLog(@"\nand the html is %@ \n",self.htmlURL);
+//        } 
+//        
+//    }
+//    return temDirURL;
+//}
 
 
 
@@ -140,7 +111,6 @@
 
 
 
-
 //- (NSURL *)fileURLForBuggyWKWebView8:(NSURL *)fileURL {
 //    NSError *error = nil;
 //    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
@@ -176,7 +146,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 //直接读取文件夹中所有文件    ---accomplished
 
