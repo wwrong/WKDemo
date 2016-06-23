@@ -38,25 +38,45 @@ static id instance;
     
         NSFileManager *fileManager= [NSFileManager defaultManager];
         NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
+        NSString * cachedir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+        NSURL *cacDirURL = [[NSURL fileURLWithPath:cachedir] URLByAppendingPathComponent:@"www"];
         [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:nil];
-        
-        for (NSString *cssStr in resourceArray) {
-            
-            NSLog(@"temDirURL is %@",temDirURL);
-            NSURL *dstURL = [temDirURL URLByAppendingPathComponent:cssStr.lastPathComponent];
-            NSLog(@"dstURL is %@",dstURL);
-            NSString *cssURLStr = [@"file://" stringByAppendingString:cssStr];
-            [fileManager removeItemAtURL:dstURL error:nil];
-            [fileManager copyItemAtURL:[NSURL URLWithString:cssURLStr] toURL:dstURL error:nil];
-            if ([cssStr.lastPathComponent containsString:@"html"]) {
-                NSLog(@"\n bingo %@\n",cssStr.lastPathComponent);
-                self.htmlURL = [NSURL URLWithString:cssURLStr];
-                NSLog(@"\nand the html is %@ \n",self.resourceURL);
-            } 
-            
-        }
     
+//    移到temp
+    
+    for (NSString *resourceURLStr in resourceArray) {
         
+        NSLog(@"temDirURL is %@",temDirURL);
+        NSURL *dstURL = [temDirURL URLByAppendingPathComponent:resourceURLStr.lastPathComponent];
+        NSLog(@"dstURL is %@",dstURL);
+        NSString *fullURLStr = [@"file://" stringByAppendingString:resourceURLStr];
+        [fileManager removeItemAtURL:dstURL error:nil];
+        [fileManager copyItemAtURL:[NSURL URLWithString:fullURLStr] toURL:dstURL error:nil];
+        if ([resourceURLStr.lastPathComponent containsString:@"html"]) {
+            NSLog(@"\n bingo %@\n",resourceURLStr.lastPathComponent);
+            self.htmlURL = [NSURL URLWithString:fullURLStr];
+        }
+        
+    }
+
+    
+    
+    
+//    到cache复制备份
+    
+    for (NSString *resourceURLStr in resourceArray) {
+        
+        NSLog(@"cacheDirURL is %@",cacDirURL);
+        NSURL *cacdstURL = [cacDirURL URLByAppendingPathComponent:resourceURLStr.lastPathComponent];
+        NSLog(@"cacdstURL is %@",cacdstURL);
+        NSString *fullcacURLStr = [@"file://" stringByAppendingString:resourceURLStr];
+        [fileManager removeItemAtURL:cacdstURL error:nil];
+        [fileManager copyItemAtURL:[NSURL URLWithString:fullcacURLStr] toURL:cacdstURL error:nil];
+        
+    }
+    
+    
+    
     
     
             self.resourceURL = temDirURL;
@@ -104,8 +124,6 @@ static id instance;
 
 
 
-
-
 -(void)checkResources{
     if ([self differFromBundle]  == YES) {
         NSLog(@"资源有不同");
@@ -122,8 +140,6 @@ static id instance;
 //    如果有区别，执行addResources方法，如果成功，覆盖文件。如果不成功，还原以前的www。
     
 }
-
-
 
 
 

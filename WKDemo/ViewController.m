@@ -147,8 +147,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-//直接读取文件夹中所有文件    ---accomplished
 
+//直接读取文件夹中所有文件    ---accomplished
 //新建一个临时目录，里面有备份，move进www文件夹，如果成功删除备份，如果不成功就把备份的拷进www文件夹。
 
 @end
