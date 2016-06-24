@@ -9,12 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface FileManager : NSObject
-//-(BOOL)transformFileFromURL:(NSObject *)startingURL toURL:(NSObject *)destinationURL;
--(BOOL)transformFileFromURLorStringPath:(NSObject *)startingPoint toURLorStringPath:(NSObject *)destinationPoint;
-//-(BOOL)transformFileFromURL:(NSURL *)startingURL toURL:(NSURL *)destinationURL;
-//-(BOOL)transformFileFromPathString:(NSString *)startingPathString toPathString:(NSString *)destinationPathString;
--(void)check;
+
+
+
+-(BOOL)translateFileFromURLorStringPath:(NSObject *)startingPoint toURLorStringPath:(NSObject *)destinationPoint ifNeedCheckingUpdate:(BOOL)needChecking;
+
+
 @end
+
+
+
+
 
 
 //拷文件或者文件夹。    ./
@@ -29,10 +34,18 @@
 
 
 
-
-
 //只留下一个方法。参数直接使用NSObject类型，然后进行类型判断，如果是NSString类型，可以直接转换成url.     /.
 
 //使用MD5.   对源地址和目标地址的文件/文件夹进行md5，然后就可以进行文件是否相同的检查。
 
 //没必要使用任何属性。    ->使用md5来确定一切。
+
+
+
+
+
+//只留下一个方法。check加入方法中，让使用者选择。
+
+//整合判断方法，NSObject判断，输出URL。
+
+//利用error参数而不是返回值来判断操作是否成功，每次置空error。
