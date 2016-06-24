@@ -16,4 +16,5 @@
 -(void)addResources;
 -(void)checkResources;
 +(instancetype)sharedfileManager;
+
 @end

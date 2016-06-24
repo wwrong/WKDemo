@@ -17,6 +17,8 @@
 		EA2060951D1A308A0057EDB3 /* WKDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2060941D1A308A0057EDB3 /* WKDemoUITests.m */; };
 		EA2060B11D1A54AD0057EDB3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = EA2060B01D1A54AD0057EDB3 /* www */; };
 		EA2060B41D1A62BF0057EDB3 /* GNFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2060B31D1A62BF0057EDB3 /* GNFileManager.m */; };
+		EA4942DE1D1BECB3000C0622 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4942DD1D1BECB3000C0622 /* FileManager.m */; };
+		EA4942E41D1CD73A000C0622 /* WsqMD5Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4942E31D1CD73A000C0622 /* WsqMD5Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		EA2060B01D1A54AD0057EDB3 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		EA2060B21D1A62BF0057EDB3 /* GNFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNFileManager.h; sourceTree = "<group>"; };
 		EA2060B31D1A62BF0057EDB3 /* GNFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNFileManager.m; sourceTree = "<group>"; };
+		EA4942DC1D1BECB3000C0622 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		EA4942DD1D1BECB3000C0622 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
+		EA4942E21D1CD73A000C0622 /* WsqMD5Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WsqMD5Util.h; sourceTree = "<group>"; };
+		EA4942E31D1CD73A000C0622 /* WsqMD5Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WsqMD5Util.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,8 @@
 		EA20606E1D1A308A0057EDB3 /* WKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EA4942E21D1CD73A000C0622 /* WsqMD5Util.h */,
+				EA4942E31D1CD73A000C0622 /* WsqMD5Util.m */,
 				EA2060B01D1A54AD0057EDB3 /* www */,
 				EA2060721D1A308A0057EDB3 /* AppDelegate.h */,
 				EA2060731D1A308A0057EDB3 /* AppDelegate.m */,
@@ -113,6 +121,8 @@
 				EA2060761D1A308A0057EDB3 /* ViewController.m */,
 				EA2060B21D1A62BF0057EDB3 /* GNFileManager.h */,
 				EA2060B31D1A62BF0057EDB3 /* GNFileManager.m */,
+				EA4942DC1D1BECB3000C0622 /* FileManager.h */,
+				EA4942DD1D1BECB3000C0622 /* FileManager.m */,
 				EA2060781D1A308A0057EDB3 /* Main.storyboard */,
 				EA20607B1D1A308A0057EDB3 /* Assets.xcassets */,
 				EA20607D1D1A308A0057EDB3 /* LaunchScreen.storyboard */,
@@ -282,9 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA4942E41D1CD73A000C0622 /* WsqMD5Util.m in Sources */,
 				EA2060771D1A308A0057EDB3 /* ViewController.m in Sources */,
 				EA2060741D1A308A0057EDB3 /* AppDelegate.m in Sources */,
 				EA2060B41D1A62BF0057EDB3 /* GNFileManager.m in Sources */,
+				EA4942DE1D1BECB3000C0622 /* FileManager.m in Sources */,
 				EA2060711D1A308A0057EDB3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +533,7 @@
 				EA20609B1D1A308A0057EDB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA20609C1D1A308A0057EDB3 /* Build configuration list for PBXNativeTarget "WKDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +542,7 @@
 				EA20609E1D1A308A0057EDB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA20609F1D1A308A0057EDB3 /* Build configuration list for PBXNativeTarget "WKDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +551,7 @@
 				EA2060A11D1A308A0057EDB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

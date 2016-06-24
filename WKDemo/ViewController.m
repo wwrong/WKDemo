@@ -25,57 +25,21 @@
     [self.view addSubview:self.webView];
     GNFileManager *manager = [GNFileManager sharedfileManager];
     [manager addResources];
+    [manager checkResources];
+
     self.htmlURL = manager.htmlURL;
     NSString *str = [NSString stringWithContentsOfURL:self.htmlURL encoding:NSUTF8StringEncoding error:nil];
-    [self.webView loadHTMLString:str baseURL:manager.resourceURL];
-
+    NSString *theS = manager.resourceURL.absoluteString;
+    if ([theS hasSuffix:@"/"]) {
+        [self.webView loadHTMLString:str baseURL:manager.resourceURL];
+    }
+    else{
+        NSURL *theResource = [NSURL URLWithString:[theS stringByAppendingString:@"/"]];
+        [self.webView loadHTMLString:str baseURL:theResource];
+    }
+    
+    
 }
-
-
-//- (NSURL *)fileURLForBuggyWKWebView8:(NSArray *)fileURL {
-//    NSFileManager *fileManager= [NSFileManager defaultManager];
-//    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
-//    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:nil];
-//    
-//    for (NSString *resourceStr in fileURL) {
-//        NSLog(@"temDirURL is %@",temDirURL);
-//        NSURL *dstURL = [temDirURL URLByAppendingPathComponent:resourceStr.lastPathComponent];
-//        NSLog(@"dstURL is %@",dstURL);
-//        // Now copy given file to the temp directory
-//        
-//        NSString *cssURLStr = [@"file://" stringByAppendingString:resourceStr];
-//        [fileManager removeItemAtURL:dstURL error:nil];
-//        [fileManager copyItemAtURL:[NSURL URLWithString:cssURLStr] toURL:dstURL error:nil];
-//        if ([resourceStr.lastPathComponent containsString:@"html"]) {
-//            NSLog(@"\n bingo %@\n",resourceStr.lastPathComponent);
-//            self.htmlURL = [NSURL URLWithString:cssURLStr];
-//            NSLog(@"\nand the html is %@ \n",self.htmlURL);
-//        } 
-//        
-//    }
-//    return temDirURL;
-//}
-
-
-
-//- (NSURL *)fileURLForBuggyWKWebView8:(NSArray *)fileURL {
-//    NSFileManager *fileManager= [NSFileManager defaultManager];
-//    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
-//    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:nil];
-//    
-//    for (NSURL *cssURL in fileURL) {
-//        
-//        NSLog(@"temDirURL is %@",temDirURL);
-//        NSURL *dstURL = [temDirURL URLByAppendingPathComponent:cssURL.lastPathComponent];
-//        NSLog(@"dstURL is %@",dstURL);
-//        // Now copy given file to the temp directory
-//        [fileManager removeItemAtURL:dstURL error:nil];
-//        [fileManager copyItemAtURL:cssURL toURL:dstURL error:nil];
-//
-//    }
-//         return temDirURL;
-//}
-
 
 
 
@@ -106,36 +70,7 @@
     }
     
     return array;
-    
 }
-
-
-
-//- (NSURL *)fileURLForBuggyWKWebView8:(NSURL *)fileURL {
-//    NSError *error = nil;
-//    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
-//        return nil;
-//    }
-//    // Create "/temp/www" directory
-//    NSFileManager *fileManager= [NSFileManager defaultManager];
-//    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
-//    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:&error];
-//    NSLog(@"temDirURL is %@",temDirURL);
-//    NSURL *dstURL = [temDirURL URLByAppendingPathComponent:fileURL.lastPathComponent];
-//    NSLog(@"dstURL is %@",dstURL);
-//    // Now copy given file to the temp directory
-//    [fileManager removeItemAtURL:dstURL error:&error];
-//    [fileManager copyItemAtURL:fileURL toURL:dstURL error:&error];
-////    NSURL *cssDstURL = [temDirURL URLByAppendingPathComponent:@"/index.css"];
-//////    NSLog(@"\nand %@",cssDstURL);
-////    NSURL *cssURL = [[NSBundle mainBundle]URLForResource:@"index" withExtension:@"css"];
-////    [fileManager removeItemAtURL:cssDstURL error:nil];
-////    [fileManager copyItemAtURL:cssURL toURL:cssDstURL error:nil];
-////    
-//    // Files in "/temp/www" load flawlesly :)
-//    return dstURL;
-//}
-
 
 
 -(BOOL)prefersStatusBarHidden{
